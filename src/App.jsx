@@ -2,9 +2,6 @@ import React, { useState } from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { Home, HandHelping, Leaf, Target, MapPin, User, Sun, Moon } from "lucide-react";
-import RegisterUser from "./RegisterUser";
-import AddDonation from "./AddDonation";
-import RegisterVolunteer from "./RegisterVolunteer";
 
 // Mock Data for Ongoing Donations
 const ongoingDonations = [
@@ -505,6 +502,15 @@ const Navigation = ({ toggleTheme, currentTheme }) => (
     </nav>
   </header>
 );
+
+function App() {
+  const [theme, setTheme] = useState("light");
+
+  const toggleTheme = () => {
+    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
+  };
+
+  return (
     <BrowserRouter>
       <Navigation toggleTheme={toggleTheme} currentTheme={theme} />
       <Routes>
@@ -516,26 +522,7 @@ const Navigation = ({ toggleTheme, currentTheme }) => (
         <Route path="/volunteer" element={<VolunteerRegistrationPage />} />
       </Routes>
     </BrowserRouter>
-const App = () => {
-  // State to manage the theme
-  const [theme, setTheme] = useState("light");
-
-  // Function to toggle the theme
-  const toggleTheme = () => {
-    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
-  };
-
-  return (
-    <BrowserRouter>
-      <Navigation toggleTheme={toggleTheme} currentTheme={theme} />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/register-user" element={<RegisterUser />} />
-        <Route path="/add-donation" element={<AddDonation />} />
-        <Route path="/register-volunteer" element={<RegisterVolunteer />} />
-      </Routes>
-    </BrowserRouter>
   );
-};
+}
 
 export default App;
